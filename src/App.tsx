@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { fetchQuizQuestions } from './API';
 //components
-import QuestionCard from './components/questionCard';
+import QuestionCard from './components/questionCard/questionCard';
 //types
-import { Question_state, Difficulty } from './API';
+import { Question_state,Difficulty} from './coreTypes';
+import { AnswerObject } from './coreTypes';
 
-type AnswerObject = {
-  question: string,
-  answer: string,
-  correct: boolean,
-  correctAnswer: string,
-}
+
 const Total_questions = 10;
 const App = () => {
   const [loading, setLoading] = useState(false);
