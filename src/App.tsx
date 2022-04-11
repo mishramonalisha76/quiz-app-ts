@@ -3,8 +3,10 @@ import { fetchQuizQuestions } from './API';
 //components
 import QuestionCard from './components/questionCard/questionCard';
 //types
-import { Question_state,Difficulty} from './coreTypes';
+import { Question_state, Difficulty } from './coreTypes';
 import { AnswerObject } from './coreTypes';
+//styles
+import { GlobalStyle,Wrapper } from './App.styles';
 
 
 const Total_questions = 10;
@@ -58,28 +60,31 @@ const App = () => {
     }
   }
   return (
-    <div className="App">
-      <h1>React Quiz</h1>
-      {gameOver || userAnswers.length === Total_questions ?
-        (<button className='start' onClick={startTrivia}>Start</button>)
-        : null}
-      {!gameOver ? <p className='score'>Score: {score}</p> : null}
-      {loading && <p > Loading Questions...</p>}
-      {!loading && !gameOver && (
-        <QuestionCard
-          questionNr={number + 1}
-          totalQuestions={Total_questions}
-          question={questions[number].question}
-          answers={questions[number].answers}
-          userAnswer={userAnswers ? userAnswers[number] : undefined}
-          callback={checkAnswer}
-        />)}
-      {!loading &&
-        !gameOver &&
-        userAnswers.length === number + 1 &&
-        number !== Total_questions - 1 ? (
-        <button className='next' onClick={nextQuestion}> Next Question</button>) : null}
-    </div>
+    <>
+      <GlobalStyle />
+      <Wrapper>
+        <h1>React Quiz</h1>
+        {gameOver || userAnswers.length === Total_questions ?
+          (<button className='start' onClick={startTrivia}>Start</button>)
+          : null}
+        {!gameOver ? <p className='score'>Score: {score}</p> : null}
+        {loading && <p > Loading Questions...</p>}
+        {!loading && !gameOver && (
+          <QuestionCard
+            questionNr={number + 1}
+            totalQuestions={Total_questions}
+            question={questions[number].question}
+            answers={questions[number].answers}
+            userAnswer={userAnswers ? userAnswers[number] : undefined}
+            callback={checkAnswer}
+          />)}
+        {!loading &&
+          !gameOver &&
+          userAnswers.length === number + 1 &&
+          number !== Total_questions - 1 ? (
+          <button className='next' onClick={nextQuestion}> Next Question</button>) : null}
+      </Wrapper>
+    </>
   );
 }
 
